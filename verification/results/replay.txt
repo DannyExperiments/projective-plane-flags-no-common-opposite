@@ -1,0 +1,11 @@
+PG(2,2) constructions: 168 quadruples, 56 distinct qualifying sets
+PG(2,2) full search: 1330 subsets, 56 qualifying
+PG(2,3) constructions: 1404 quadruples, 1404 distinct qualifying sets
+PG(2,3) full search: 270725 subsets, 1404 qualifying
+PG(2,3) coordinate example: 4 flags, 52 candidates, 2 uncovered points, 0 common opposites
+PG(2,4) constructions: 6720 quadruples, 6720 distinct qualifying sets
+PG(2,4) fixed-flag search: 4598126 subsets, 320 qualifying through the fixed flag, 6720 total by flag transitivity
+PG(2,5) constructions: 23250 quadruples, 23250 distinct qualifying sets
+PG(2,7) constructions: 156408 quadruples, 156408 distinct qualifying sets
+PG(2,11) constructions: 2124276 quadruples, 2124276 distinct qualifying sets
+All finite checks passed.

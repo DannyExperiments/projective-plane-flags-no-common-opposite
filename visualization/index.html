@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Four flags in PG(2,3)</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0e1829;--fg:#edf2fa;--muted:#abbad1;--border:#3b4f69;--panel:#16243a;--point:#69ddc7;--line:#ffc582;--hit:#eade73}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,sans-serif}
+    main{max-width:1040px;margin:auto;padding:20px clamp(12px,4vw,42px) 32px}
+    h1{margin:0;font-size:clamp(1.6rem,5vw,2.5rem);line-height:1.14}
+    h2{font-size:1.15rem;margin:0 0 8px}
+    p{margin:8px 0}
+    header p,.note{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(245px,1fr);gap:16px;margin-top:20px}
+    section{min-width:0;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+    canvas{display:block;width:100%;height:clamp(260px,44vw,410px);background:var(--bg);border-radius:9px;touch-action:pan-y}
+    label{display:block;font-weight:650}
+    select,button{font:inherit;color:var(--fg);padding:7px 9px;min-height:42px;background:#22374f;border:1px solid #657d9c;border-radius:7px}
+    select{width:100%;margin:2px 0 10px}
+    button{cursor:pointer}
+    button:focus-visible,select:focus-visible,canvas:focus-visible{outline:3px solid var(--hit);outline-offset:2px}
+    .stats,.legend,.moves{display:flex;column-gap:12px;row-gap:8px;flex-wrap:wrap;align-items:center}
+    .stats{color:var(--muted);margin-top:14px;font-size:.95rem}
+    .stats strong{color:var(--fg)}
+    .legend{font-size:.85rem;color:var(--muted);margin:8px 0}
+    .moves{margin-top:8px}
+    #verdict{display:block;padding:8px 10px;border-left:3px solid var(--hit);background:#243149;margin-top:7px}
+    .point{color:var(--point)}.line{color:var(--line)}.hit{color:var(--hit)}
+    table{width:100%;border-collapse:collapse;margin-top:11px;font-variant-numeric:tabular-nums;font-size:.9rem}
+    th,td{text-align:left;padding:5px 3px;border-bottom:1px solid var(--border)}
+    @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Four flags with no common opposite</h1>
+    <p>Choose any flag (y, n) in PG(2,3). At least one selected flag (P, L) has y on L or P on n.</p>
+    <div class="stats"><span><strong id="total">52</strong> candidate flags</span><span><strong id="covered">11</strong> points on selected lines</span><span><strong id="remaining">2</strong> points outside them</span></div>
+  </header>
+  <div class="grid">
+    <section aria-labelledby="diagram-title">
+      <h2 id="diagram-title">Incidence diagram</h2>
+      <canvas id="scene" tabindex="0" aria-label="Rotatable incidence diagram. Use left and right arrow keys to rotate."></canvas>
+      <div class="legend"><span class="point">● Point</span><span class="line">◆ Line</span><span>Blue edge: selected flag</span><span class="hit">Gold edge: incidence ruling out opposition</span></div>
+      <div class="moves">
+        <button type="button" id="rotate">Rotate</button>
+        <button type="button" id="reset">Reset view</button>
+      </div>
+      <p class="note">Drag to turn the diagram. Each edge shows a specified incidence. Positions are part of the diagram layout.</p>
+    </section>
+    <section aria-labelledby="candidate-title">
+      <h2 id="candidate-title">Test a candidate flag</h2>
+      <label for="point">Point y</label>
+      <select id="point"></select>
+      <label for="line">Line n through y</label>
+      <select id="line"></select>
+      <button type="button" id="next">Next candidate</button>
+      <output id="verdict" aria-live="polite"></output>
+      <table>
+        <thead><tr><th>Flag</th><th class="point">Point P</th><th class="line">Line L</th></tr></thead>
+        <tbody id="flags"></tbody>
+      </table>
+      <p class="note">At either point outside the selected lines, each of its four lines contains exactly one selected point.</p>
+    </section>
+  </div>
+</main>
+<script>
+"use strict";
+const triples = [
+  ...Array.from({length: 9}, (_, i) => [1, Math.floor(i / 3), i % 3]),
+  ...Array.from({length: 3}, (_, i) => [0, 1, i]), [0, 0, 1]
+];
+const flags = [
+  [[1,0,0], [0,1,0]], [[0,1,0], [0,0,1]], [[0,0,1], [1,0,0]], [[1,0,1], [1,0,2]]
+];
+const incident = (point, line) => point.reduce((sum, x, i) => sum + x * line[i], 0) % 3 === 0;
+const linesAt = point => triples.filter(line => incident(point, line));
+const uncovered = point => flags.every(([, line]) => !incident(point, line));
+function blockers(y, n) {
+  return flags.map(([point, line], i) => [i, incident(y, line), incident(point, n)])
+              .filter(([, viaLine, viaPoint]) => viaLine || viaPoint);
+}
+
+const key = c => c.join("");
+const showPoint = c => "(" + c.join(":") + ")";
+const showLine = c => "[" + c.join(",") + "]";
+const get = id => document.getElementById(id);
+const pointSelect = get("point");
+const lineSelect = get("line");
+const canvas = get("scene");
+const context = canvas.getContext("2d");
+const colors = {point:"#69ddc7", line:"#ffc582", flag:"#728fd7", hit:"#eade73", trial:"#8da0bc"};
+const grid = [1.45, .49, -.49, -1.45];
+const nodes = [
+  ...grid.map((z,i) => ({id:"P"+(i+1), kind:"point", position:[-1.75,-.45,z]})),
+  ...grid.map((z,i) => ({id:"L"+(i+1), kind:"line", position:[ 1.75, .45,z]})),
+  {id:"y", kind:"point", position:[-.43,-1.38,.46]},
+  {id:"n", kind:"line", position:[ .43, 1.38,-.46]}
+];
+const initialAngle = -.15;
+let angle = initialAngle, dragging = false, previousX = 0, rotating = false, frame = 0, lastTime = 0;
+
+for (const point of triples) {
+  pointSelect.add(new Option(showPoint(point) + (uncovered(point) ? " · outside selected lines" : ""), key(point)));
+}
+for (const [i,[point,line]] of flags.entries()) {
+  const row = get("flags").insertRow();
+  for (const value of [String(i+1), showPoint(point), showLine(line)]) row.insertCell().textContent = value;
+}
+get("total").textContent = triples.length * linesAt(triples[0]).length;
+get("remaining").textContent = triples.filter(uncovered).length;
+get("covered").textContent = triples.length - triples.filter(uncovered).length;
+pointSelect.value = "112";
+
+function selectedPoint() { return triples.find(point => key(point) === pointSelect.value); }
+function selectedLine() { return triples.find(line => key(line) === lineSelect.value); }
+function syncLines() {
+  lineSelect.replaceChildren();
+  for (const line of linesAt(selectedPoint())) lineSelect.add(new Option(showLine(line), key(line)));
+}
+function render() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+  if (canvas.width !== Math.round(w*dpr) || canvas.height !== Math.round(h*dpr)) {
+    canvas.width = Math.round(w*dpr); canvas.height = Math.round(h*dpr);
+  }
+  context.setTransform(dpr,0,0,dpr,0,0);
+  context.clearRect(0,0,w,h);
+  const scale = Math.min(w / 5.35, h / 4.30);
+  const projected = nodes.map(node => {
+    const [x,y,z] = node.position;
+    const side = x*Math.cos(angle) - y*Math.sin(angle);
+    const depth = x*Math.sin(angle) + y*Math.cos(angle);
+    const elevation = .30;
+    const vertical = z*Math.cos(elevation) - depth*Math.sin(elevation);
+    const cameraDepth = depth*Math.cos(elevation) + z*Math.sin(elevation);
+    const zoom = 8 / (8 - cameraDepth);
+    return {...node, screen:[w/2+side*scale*zoom,h/2-vertical*scale*zoom], depth:cameraDepth, zoom};
+  });
+  const edges = [...grid.map((_,i) => [i,i+4,"flag"]), [8,9,"trial"]];
+  for (const [i, viaLine, viaPoint] of blockers(selectedPoint(), selectedLine())) {
+    if (viaLine) edges.push([8,i+4,"hit"]);
+    if (viaPoint) edges.push([i,9,"hit"]);
+  }
+  for (const [from,to,kind] of edges) {
+    context.strokeStyle = colors[kind];
+    context.lineWidth = kind === "hit" ? 3.6 : 1.5;
+    context.setLineDash(kind === "trial" ? [6,4] : []);
+    context.beginPath();
+    context.moveTo(...projected[from].screen);
+    context.lineTo(...projected[to].screen);
+    context.stroke();
+  }
+  context.setLineDash([]);
+  for (const node of [...projected].sort((a,b) => a.depth-b.depth)) {
+    const [x,y] = node.screen;
+    const r = (node.id.length === 1 ? 8 : 6) * node.zoom;
+    context.fillStyle = colors[node.kind];
+    context.beginPath();
+    if (node.kind === "point") context.arc(x,y,r,0,Math.PI*2);
+    else { context.moveTo(x,y-r);context.lineTo(x+r,y);context.lineTo(x,y+r);context.lineTo(x-r,y);context.closePath(); }
+    context.fill();
+    context.lineWidth = 3;
+    context.strokeStyle = "#0e1829";
+    context.stroke();
+    context.font = "bold 13px system-ui";
+    context.textAlign = "center";
+    context.strokeText(node.id,x,y-r-4);
+    context.fillText(node.id,x,y-r-4);
+  }
+}
+function showCandidate() {
+  const hits = blockers(selectedPoint(), selectedLine());
+  const messages = [];
+  for (const [i, viaLine, viaPoint] of hits) {
+    if (viaLine) messages.push("y lies on L" + (i+1));
+    if (viaPoint) messages.push("P" + (i+1) + " lies on n");
+  }
+  get("verdict").textContent = hits.length ? messages.join(" · ") + ". Common opposition fails." : "Common opposite.";
+  render();
+}
+pointSelect.addEventListener("change", () => { syncLines(); showCandidate(); });
+lineSelect.addEventListener("change", showCandidate);
+get("next").addEventListener("click", () => {
+  if (lineSelect.selectedIndex < lineSelect.options.length - 1) lineSelect.selectedIndex++;
+  else {
+    pointSelect.selectedIndex = (pointSelect.selectedIndex + 1) % pointSelect.options.length;
+    syncLines();
+  }
+  showCandidate();
+});
+function tick(time) {
+  if (!rotating) return;
+  if (lastTime) angle += Math.min(time-lastTime,50) * .0005;
+  lastTime = time;
+  render();
+  frame = requestAnimationFrame(tick);
+}
+function setRotation(value) {
+  rotating = value;
+  get("rotate").textContent = value ? "Pause rotation" : "Rotate";
+  if (frame) cancelAnimationFrame(frame);
+  lastTime = 0;
+  if (rotating) frame = requestAnimationFrame(tick);
+}
+get("rotate").addEventListener("click", () => setRotation(!rotating));
+get("reset").addEventListener("click", () => { setRotation(false); angle=initialAngle; render(); });
+canvas.addEventListener("pointerdown", e => {
+  setRotation(false); dragging = true; previousX = e.clientX;
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener("pointermove", e => {
+  if (dragging) { angle += (e.clientX-previousX)*.012; previousX=e.clientX; render(); }
+});
+function finishDrag() { dragging = false; }
+canvas.addEventListener("pointercancel", finishDrag);
+canvas.addEventListener("pointerup", finishDrag);
+canvas.addEventListener("keydown", e => {
+  if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
+    e.preventDefault(); setRotation(false);
+    angle += e.key === "ArrowLeft" ? -.15 : .15;
+    render();
+  }
+});
+new ResizeObserver(render).observe(canvas);
+syncLines();
+lineSelect.value = "011";
+showCandidate();
+</script>
+</body>
+</html>

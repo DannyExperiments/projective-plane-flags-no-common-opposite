@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "Please cite this manuscript using the organizational citation identity below."
+title: "Sets of flags with no common opposite in finite projective planes"
+authors:
+  - name: DannyExperiments
+type: article
+repository-code: "https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite"
+abstract: "Every finite projective plane of order s at least three has a set of s+1 incident flags without a common opposite and with noncollinear point entries and nonconcurrent line entries. For PG(2,q) with q at least three, the construction classifies all such sets."
+keywords:
+  - projective planes
+  - flags
+  - opposition
+  - nuclei

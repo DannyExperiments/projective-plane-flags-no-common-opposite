@@ -1,0 +1,124 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb}
+\DeclareMathSizes{8}{8}{8}{8}
+\DeclareMathSizes{9}{9}{8}{8}
+\DeclareMathSizes{10.95}{10.95}{8}{8}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Sets of flags with no common opposite in finite projective planes},pdfauthor={DannyExperiments}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\PG}{\mathrm{PG}}
+\newcommand{\AG}{\mathrm{AG}}
+\newcommand{\FF}{\mathbb F}
+
+\title{Sets of flags with no common opposite in finite projective planes}
+\date{November 2026}
+\begin{document}
+\begin{abstract}
+Busch and Van Maldeghem conjectured that the cyclic flags of a triangle in the Fano plane are the only set of \(s+1\) flags in a projective plane of order \(s\) that has no common opposite and whose point entries do not form a line and line entries do not form a pencil. We give counterexamples in every finite projective plane of order \(s\geq 3\). In \(\PG(2,q)\) for \(q\geq 3\), the construction gives all such sets and there are exactly \(q^3(q+1)(q^2+q+1)\) of them. The classification uses the Blokhuis--Wilbrink bound on nuclei.
+\end{abstract}
+\maketitle
+
+\section{The question and the construction}
+
+A flag is an incident pair \((p,L)\) of a point and a line. Flags \((p,L)\) and \((y,n)\) are \emph{opposite} if \(y\notin L\) and \(p\notin n\). For a set \(F\) of flags, let \(P\) and \(\mathcal L\) be the sets of its point and line entries. A \emph{pencil} means the full set of lines through one point.
+
+Busch and Van Maldeghem ask whether the three cyclic flags of a triangle in \(\PG(2,2)\) are the only set \(F\) of \(s+1\) flags in a projective plane of order \(s\) for which \(F\) has no common opposite, \(P\) is different from the full point set of any line, and \(\mathcal L\) is different from any pencil \cite[Remark~5.4 in arXiv versions 1 and 2]{BuschVanMaldeghem}. Busch also states the conjecture in her thesis \cite[Remark~9.9.0.4, p.~308]{Busch}. Call these sets \emph{nontrivial} in this paper.
+
+\begin{theorem}\label{thm:construction}
+In every projective plane of finite order \(s\geq2\), choose a line \(m\), distinct points \(R,A\) on \(m\), and a point \(B\) off \(m\). Write \(UV\) for the join of distinct points \(U,V\). Then
+\[
+F=\{(A,m),(B,BA)\}\cup\{(X,BX): X\in m\setminus\{R,A\}\}
+\]
+is a nontrivial set of \(s+1\) flags with pairwise distinct point entries and pairwise distinct line entries. For \(s=2\) these are cyclic triangle flags.
+\end{theorem}
+
+\begin{proof}
+The point entries are \((m\setminus\{R\})\cup\{B\}\). Two of them span \(m\), which omits \(B\), so they are noncollinear. The line entries are \(m\) and the \(s\) lines through \(B\) other than \(BR\). Two of those lines meet at \(B\), which is off \(m\), so the entries are nonconcurrent. The displayed pairs are incident and their count is \(2+(s-1)=s+1\).
+
+Take any flag \((y,n)\). If \(y\) is on a selected line, that incidence rules out a common opposite. Otherwise \(y\) is on \(BR\setminus\{B,R\}\). Each of the \(s\) joins from \(y\) to \(m\setminus\{R\}\) meets \(m\) at a different point, and the remaining line through \(y\) is \(BR\), which contains \(B\). These exhaust the \(s+1\) lines through \(y\), each meeting a selected point. In particular \(n\) meets a selected point and again \((y,n)\) fails to be a common opposite. For \(s=2\), with \(X\) the third point of \(m\), the three lines are the triangle sides \(AX,BA,BX\) and the pairs have cyclic orientation.
+\end{proof}
+
+For example, work in \(\PG(2,3)\) with homogeneous points \((x:y:z)\) and with \([a,b,c]\) denoting the line \(ax+by+cz=0\). Take \(m=[0,1,0]\), \(R=(1:0:2)\), \(A=(1:0:0)\) and \(B=(0:1:0)\). The four flags are
+\[
+\begin{gathered}
+((1:0:0),[0,1,0]),\quad ((0:1:0),[0,0,1]),\\
+((0:0:1),[1,0,0]),\quad ((1:0:1),[1,0,2]).
+\end{gathered}
+\]
+Only \((1:1:2)\) and \((1:2:2)\) lie outside the selected lines.
+
+\section{Counting uncovered points}
+
+\begin{lemma}\label{lem:uncovered}
+In a projective plane of order \(s\geq2\), any set of at most \(s\) lines leaves a point uncovered. Any set of \(s+1\) nonconcurrent lines leaves at least \(s-1\) points uncovered. For \(s\geq3\), equality in the second bound occurs exactly when the lines consist of \(m\) off a point \(B\) and all lines through \(B\) except one line \(h\). Then the uncovered points are \(h\setminus\{B,h\cap m\}\).
+\end{lemma}
+
+\begin{proof}
+The first line covers \(s+1\) points and each additional line at most \(s\) new ones, giving at most \(s^2+1\) when there are at most \(s\) lines. The whole plane has \(s^2+s+1\) points.
+
+For \(s+1\) nonconcurrent lines, let \(k\) be the maximum number through a point. The \(k\) lines at that point cover \(1+ks\) points. Each remaining line meets them in \(k\) distinct points, so the union has size at most
+\[
+1+ks+(s+1-k)^2=s^2+2-(k-2)(s-k).
+\]
+Here \(2\leq k\leq s\). If \(k=2\), all pairwise intersections are distinct and the number covered is \((s+1)(s+2)/2\), which is strictly below \(s^2+2\) for \(s\geq3\). If \(2<k<s\), the displayed bound is strict as well. If \(k=s\), the geometry has the stated form and exactly \(s-1\) points remain uncovered.
+\end{proof}
+
+If no flag is opposite all members of \(F\), every point \(y\) uncovered by \(\mathcal L\) lies outside \(P\) and all \(s+1\) lines through \(y\) meet \(P\). They intersect one another only at \(y\), so \(|P|=s+1\), with exactly one selected point on each. Such a point \(y\) is a \emph{nucleus} of \(P\). Dually, a line disjoint from \(P\) is a nucleus of \(\mathcal L\) in the dual plane and forces \(|\mathcal L|=s+1\).
+
+For a nontrivial \(F\), the exclusion of a full pencil and Lemma~\ref{lem:uncovered} give an uncovered point, whether \(|\mathcal L|\leq s\) or \(|\mathcal L|=s+1\). The same reasoning in the dual gives a line disjoint from \(P\). It follows that both sets of entries have full size, so the exclusions of a full line and a full pencil are equivalent here to noncollinearity and nonconcurrency.
+
+\section{Classification in Desarguesian planes}
+
+\begin{theorem}\label{thm:classification}
+For a prime power \(q\geq3\), every nontrivial set of \(q+1\) flags in \(\PG(2,q)\) arises from a unique quadruple \((m,R,A,B)\) as in Theorem~\ref{thm:construction}. The number of sets is \(q^3(q+1)(q^2+q+1)\).
+\end{theorem}
+
+\begin{proof}
+The Blokhuis--Wilbrink theorem bounds the number of nuclei of an affine \((q+1)\)-point set in \(\AG(2,q)\) by \(q-1\) \cite{BlokhuisWilbrink,BlokhuisMazzocca}. We apply it to \(P\) using a line disjoint from \(P\) as the line at infinity. All nuclei are affine because a point at infinity lies on that disjoint line. Apply the same theorem to \(\mathcal L\) in the dual chart.
+
+By Lemma~\ref{lem:uncovered} and the nucleus observation, the number of uncovered points is exactly \(q-1\). Thus \(\mathcal L\) consists of a line \(m\) off \(B\) and all lines through \(B\) except one line \(h\). Put \(R=h\cap m\). Its uncovered set is \(h\setminus\{B,R\}\). The dual argument gives \(P=(m'\setminus\{R'\})\cup\{B'\}\), with \(B'\notin m'\). The joins argument of Theorem~\ref{thm:construction} shows that the \(q-1\) points of \(B'R'\setminus\{B',R'\}\) are nuclei of \(P\). These exhaust the nucleus bound, so
+\[
+h\setminus\{B,R\}=B'R'\setminus\{B',R'\}.
+\]
+The common set contains at least two points. Hence \(h=B'R'\) and \(\{B,R\}=\{B',R'\}\).
+
+Suppose \(B'=R\) and \(R'=B\). Choose a selected line through \(B\) different from \(m'\). It meets \(m'\) at the omitted point \(B\), and it misses \(R\) because \(h\) is the unique join of \(B\) and \(R\). The selected line would miss \(P\), contradicting its occurrence in a flag of \(F\). Thus \(B'=B\) and \(R'=R\). If \(m\ne m'\), the selected line \(m\) also misses \(P\) since it meets \(m'\) only at \(R\) and omits \(B\). Hence \(m'=m\).
+
+Let \(A\) be paired with \(m\). Every \(X\in m\setminus\{R,A\}\) must be paired with \(BX\), the only other selected line through \(X\). The remaining point \(B\) must be paired with \(BA\). The line \(m\) is determined by its \(q\) selected points, since every other line contains at most two, and then \(R,A,B\) are determined as well. There are \((q^2+q+1)(q+1)q\,q^2\) choices.
+\end{proof}
+
+In \(\PG(2,2)\), the point entries form a triangle. After a coordinate change they are the three coordinate points, whose unique nucleus is \((1:1:1)\): the other points outside the triangle each lie on a side. The uncovered point must be this nucleus. Among lines avoiding it, the only ones incident with one of the triangle points are its three sides. The two possible pairings are cyclic. There are \(\binom73-7=28\) triangles, hence 56 sets. Each set now has three possible choices of \(m\).
+
+The point set in Theorem~\ref{thm:construction} is the classical example attaining the nucleus bound \cite{Blokhuis}. For related point-set classifications see \cite{KorchmarosMazzocca}. The proof of Theorem~\ref{thm:classification} uses equality in the elementary line-union bound to obtain the shape of \(P\) and \(\mathcal L\). The classification applies to Desarguesian planes. The construction itself uses only the projective-plane axioms. The accompanying finite replay is illustrative.
+
+\section{The classical nucleus bound}
+
+For completeness, here is the finite-field proof in an affine chart. Regard \(\AG(2,q)\) as the two-dimensional \(\FF_q\)-space \(\FF_{q^2}\). The map \(d\mapsto d^{q-1}\) on \(\FF_{q^2}^{\times}\) has kernel \(\FF_q^{\times}\) and takes the \(q+1\) directions bijectively to the roots of \(T^{q+1}-1\). For a nucleus \(y\) of a \((q+1)\)-point set \(S\), the directions of \(u-y\), \(u\in S\), exhaust all directions. Those roots sum to zero, so every nucleus is a root of
+\[
+f(T)=\sum_{u\in S}(u-T)^{q-1}.
+\]
+The leading coefficient is \((q+1)(-1)^{q-1}=(-1)^{q-1}\) in the field. Thus \(f\) has degree \(q-1\), proving the bound.
+
+\section*{Research disclosure}
+\begingroup\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\relax
+Under human direction, ChatGPT Astra 6.2 (OpenAI) generated the discovery proof and its research packet. Claude Opus 5.5 (Anthropic) assisted with earlier audits and manuscript preparation. OpenAI Codex performed the mathematical review and revised the paper. GPT-6.2 Sol assisted with literature searches and release preparation. DannyExperiments maintains the repository and is the preferred citation identity. No AI system is proposed as an author.
+\par\endgroup
+
+\begin{thebibliography}{9}
+\bibitem{BuschVanMaldeghem}
+S. Busch and H. Van Maldeghem, \emph{Lines and opposition in Lie incidence geometries of exceptional type}, Ann. Comb. (2026), \href{https://doi.org/10.1007/s00026-026-00842-w}{doi:10.1007/s00026-026-00842-w}. \href{https://arxiv.org/html/2602.01110v2#S5.SS1}{arXiv:2602.01110v2}.
+\bibitem{Busch}
+S. Busch, \emph{Groups of automorphisms of spherical buildings}, Ph.D. thesis, University of M\"unster, 2025 (defended January 2026). \href{https://sirabusch.de/dissertationSiraBusch.pdf#page=308}{Thesis PDF}.
+\bibitem{BlokhuisWilbrink}
+A. Blokhuis and H. A. Wilbrink, \emph{A characterization of exterior lines of certain sets of points in \(\PG(2,q)\)}, Geom. Dedicata \textbf{23} (1987), no.~2, 253--254. \href{https://doi.org/10.1007/BF00181280}{doi:10.1007/BF00181280}.
+\bibitem{BlokhuisMazzocca}
+A. Blokhuis and F. Mazzocca, \emph{Lifts of nuclei in finite projective spaces}, in \emph{Finite Geometries and Combinatorics}, Cambridge University Press, 1993, pp.~31--36. \href{https://doi.org/10.1017/CBO9780511526336.005}{doi:10.1017/CBO9780511526336.005}.
+\bibitem{Blokhuis}
+A. Blokhuis, \emph{On multiple nuclei and a conjecture of Lunelli and Sce}, Bull. Belg. Math. Soc. Simon Stevin \textbf{1} (1994), no.~3, 349--353. \href{https://www.maths.tcd.ie/EMIS/journals/BBMS/Bulletin/bul943/AART.PDF}{Journal PDF}.
+\bibitem{KorchmarosMazzocca}
+G. Korchm\'{a}ros and F. Mazzocca, \emph{Nuclei of point sets of size \(q+1\) contained in the union of two lines in \(\PG(2,q)\)}, Combinatorica \textbf{14} (1994), 63--69. \href{https://doi.org/10.1007/BF01305951}{doi:10.1007/BF01305951}.
+\end{thebibliography}
+\end{document}

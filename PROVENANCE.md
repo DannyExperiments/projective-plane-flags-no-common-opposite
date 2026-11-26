@@ -1,0 +1,3 @@
+# Provenance
+
+The manuscript revises the recovered Q124 construction and its Desarguesian classification supplement. The original problem is [catalog Q124](https://github.com/10m-u/open-problems-catalog/blob/ca8d4d44ba3db527f19f28928c240168f545ecfe/problems/mathematics/geometry-differential-geometry-part-1.md#q124). The primary statement was checked against Busch's thesis and the preprint and author-hosted manuscript of Busch–Van Maldeghem. The literature review records the journal citation and its version-access limits. Mathematical and finite check roles are described in the [research disclosure](AI_DISCLOSURE.md).
