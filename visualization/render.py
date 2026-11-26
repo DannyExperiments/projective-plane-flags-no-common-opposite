@@ -42,7 +42,7 @@ def project(position, angle):
     vertical = z * cos(.30) - depth * sin(.30)
     camera_depth = depth * cos(.30) + z * sin(.30)
     zoom = 8 / (8 - camera_depth)
-    return (WIDTH / 2 + side * 122 * zoom, 242 - vertical * 73 * zoom), camera_depth, zoom
+    return (WIDTH / 2 + side * 122 * zoom, 242 - vertical * 46 * zoom), camera_depth, zoom
 
 
 def render(angle, font):
