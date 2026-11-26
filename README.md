@@ -13,7 +13,7 @@ In every finite projective plane of order s ≥ 3, there are s+1 point–line fl
 
 Two flags `(P,L)` and `(y,n)` are opposite exactly when `y` lies off `L` and `n` misses `P`. The four blue edges are the selected flags. The gold edge in the figure shows why one candidate fails. In the explorer you can choose any of the 52 candidates and see its blocking incidences. Circles represent points, diamonds represent lines, and positions are a layout for the incidence diagram.
 
-[Download the offline explorer](visualization/four-flags-explorer.zip?raw=1) · [HTML source](visualization/index.html) · [GIF rendering source](visualization/render.py)
+[Download the offline explorer](https://raw.githubusercontent.com/DannyExperiments/projective-plane-flags-no-common-opposite/d84de11352371016855a2e1001b342c428c44f7e/visualization/four-flags-explorer.zip) · [HTML source](visualization/index.html) · [GIF rendering source](visualization/render.py)
 
 ## Why the construction works
 
