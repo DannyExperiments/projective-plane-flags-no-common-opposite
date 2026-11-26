@@ -1,6 +1,4 @@
-# Candidate manifest
-
-The following files are covered by the SHA-256 ledger.
+# Release manifest
 
 - `.github/workflows/pdf.yml`
 - `.github/workflows/replay.yml`

@@ -1,3 +1,5 @@
 # Provenance
 
 The manuscript revises the recovered Q124 construction and its Desarguesian classification supplement. The original problem is [catalog Q124](https://github.com/10m-u/open-problems-catalog/blob/ca8d4d44ba3db527f19f28928c240168f545ecfe/problems/mathematics/geometry-differential-geometry-part-1.md#q124). The primary statement was checked against Busch's thesis and the preprint and author-hosted manuscript of Busch–Van Maldeghem. The literature review records the journal citation and its version-access limits. Mathematical and finite check roles are described in the [research disclosure](AI_DISCLOSURE.md).
+
+Version 1.0.0 distributes the same manuscript, bibliography, mathematical proof and replay as [the reviewed commit](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/commit/086978973a336faf1788c4300dd6aab7f2b6b1c3). [Release archive](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/releases/tag/v1.0.0) · [Version DOI](https://doi.org/10.5281/zenodo.24567310) · [File inventory](MANIFEST.md)

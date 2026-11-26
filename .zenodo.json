@@ -1,10 +1,29 @@
 {
   "title": "Sets of flags with no common opposite in finite projective planes",
-  "creators": [{"name": "DannyExperiments"}],
-  "description": "<p>In every finite projective plane of order s at least three there are s+1 flags with no common opposite whose point entries are noncollinear and whose line entries are nonconcurrent. In PG(2,q) for q at least three, all such sets arise from one construction and their number is q³(q+1)(q²+q+1). The classification uses the Blokhuis–Wilbrink nucleus bound.</p><p>Under human direction, ChatGPT Astra 6.2 (OpenAI) generated the discovery proof and its research packet. Claude Opus 5.5 (Anthropic) assisted with earlier audits and manuscript preparation. OpenAI Codex performed the mathematical review and revised the paper. GPT-6.2 Sol assisted with literature searches and release preparation. DannyExperiments maintains the repository and is the preferred citation identity. No AI system is proposed as an author.</p>",
-  "access_right": "closed",
-  "upload_type": "publication",
-  "publication_type": "preprint",
-  "language": "eng",
-  "keywords": ["projective planes", "flags", "opposition", "nuclei", "finite geometry"]
+  "upload_type": "software",
+  "publication_date": "2026-11-27",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "DannyExperiments"
+    }
+  ],
+  "description": "<p>Every finite projective plane of order s at least three admits s+1 incident flags with no common opposite and with noncollinear point entries and nonconcurrent line entries. For prime powers q at least three in PG(2,q), the construction gives all such sets, and there are q³(q+1)(q²+q+1) unordered sets.</p><p>The classification uses the classical Blokhuis–Wilbrink nucleus bound. Classification in arbitrary non-Desarguesian planes remains outside this result.</p><p>Includes the manuscript, LaTeX and bibliography, proof guides, audit summaries, exact replay, and interactive illustration. Internally reviewed. External peer review is pending.</p><p>Under human direction, ChatGPT Astra 6.2 (OpenAI) generated the discovery proof and research packet. Claude Opus 5.5 (Anthropic) assisted with earlier audits and manuscript preparation. OpenAI Codex performed mathematical review and revised the paper. GPT-6.2 Sol (OpenAI) assisted with literature and release preparation. DannyExperiments is the project citation identity.</p>",
+  "keywords": [
+    "projective planes",
+    "flags",
+    "opposition",
+    "nuclei",
+    "finite geometry"
+  ],
+  "access_right": "open",
+  "license": "other-closed",
+  "notes": "All rights reserved. Publicly downloadable files are supplied without a repository-wide reuse license.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/releases/tag/v1.0.0",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
 }
