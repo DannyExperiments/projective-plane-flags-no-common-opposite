@@ -9,7 +9,7 @@ In every finite projective plane of order s ≥ 3, there are s+1 point–line fl
 
 ## Explore the proof in 3D
 
-![A rotating incidence diagram of the four selected flags of PG(2,3). A gold edge marks the selected point on the candidate line, which rules out opposition.](visualization/four-flags.gif)
+![A portrait incidence animation labels four selected flags of PG(2,3). The gold edge shows that the trial line n contains the selected point P1, ruling out opposition.](visualization/four-flags.gif)
 
 Two flags `(P,L)` and `(y,n)` are opposite exactly when `y` lies off `L` and `n` misses `P`. The four blue edges are the selected flags. The gold edge in the figure shows why one candidate fails. In the explorer you can choose any of the 52 candidates and see its blocking incidences. Circles represent points, diamonds represent lines, and positions are a layout for the incidence diagram.
 
