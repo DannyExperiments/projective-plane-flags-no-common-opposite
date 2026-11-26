@@ -1,6 +1,10 @@
 # Sets of flags with no common opposite in finite projective planes
 
-In every finite projective plane of order (sge 3), there are (s+1) point–line flags that have no common opposite, with noncollinear point entries and nonconcurrent line entries. In `PG(2,q)` for (qge 3), one construction gives all such sets. Their number is (q^3(q+1)(q^2+q+1)).
+[![Repository verification](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/verify.yml)
+[![Replay verification](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/replay.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/replay.yml)
+[![PDF build](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/pdf.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/pdf.yml)
+
+In every finite projective plane of order s ≥ 3, there are s+1 point–line flags that have no common opposite, with noncollinear point entries and nonconcurrent line entries. In `PG(2,q)` for q ≥ 3, one construction gives all such sets. Their number is q³(q+1)(q²+q+1).
 
 [Read the paper](paper/manuscript.pdf) · [TeX source](paper/manuscript.tex) · [Original conjecture, Remark 5.4 in arXiv v2](https://arxiv.org/html/2602.01110v2#S5.SS1) · [Catalog Q124](https://github.com/10m-u/open-problems-catalog/blob/ca8d4d44ba3db527f19f28928c240168f545ecfe/problems/mathematics/geometry-differential-geometry-part-1.md#q124)
 
