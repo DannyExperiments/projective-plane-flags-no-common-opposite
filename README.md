@@ -1,6 +1,7 @@
 # Sets of flags with no common opposite in finite projective planes
 
 [![Repository verification](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/verify.yml) [![Replay verification](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/replay.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/replay.yml) [![PDF build](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/pdf.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/pdf.yml)
+[![Partial Lean verification](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/actions/workflows/lean.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24567310.svg)](https://doi.org/10.5281/zenodo.24567310)
 
 In every finite projective plane of order s ≥ 3, there are s+1 point–line flags that have no common opposite, with noncollinear point entries and nonconcurrent line entries. In `PG(2,q)` for q ≥ 3, one construction gives all such sets. Their number is q³(q+1)(q²+q+1).
@@ -33,3 +34,7 @@ python3 -I verification/src/replay.py
 The finite replay checks the construction through the stated orders and exhaustively checks the classification in orders 2 and 3. It checks order 4 via a fixed flag and flag transitivity. See [recorded results](verification/results/replay.txt), [reproducibility](REPRODUCIBILITY.md), [scope](CLAIM_SCOPE_AND_LIMITATIONS.md), and [research disclosure](AI_DISCLOSURE.md).
 
 [Release v1.0.0](https://github.com/DannyExperiments/projective-plane-flags-no-common-opposite/releases/tag/v1.0.0) · [Version DOI](https://doi.org/10.5281/zenodo.24567310) · [Citation metadata](CITATION.cff)
+
+## Partial Lean verification
+
+Lean proves that the constructed family has incident flags, has no common opposite, and has noncollinear point entries and nonconcurrent line entries given a third suitable point on the base line. The proof uses incidence, a chosen join with uniqueness for distinct points and a common point for each pair of lines. It works at arbitrary order. The finite cardinality of the family, the existence of the starting data at each order, the order-two analysis and the Desarguesian classification and count are in the paper. [Lean source](formalization/FlagConstruction.lean) · [Replay and scope](formalization/README.md)

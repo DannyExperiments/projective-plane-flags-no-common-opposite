@@ -1,0 +1,3 @@
+'FlagConstruction.selected_incident' does not depend on any axioms
+'FlagConstruction.no_common_opposite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FlagConstruction.neither_line_nor_pencil' does not depend on any axioms

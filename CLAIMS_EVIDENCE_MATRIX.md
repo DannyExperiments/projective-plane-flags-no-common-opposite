@@ -6,3 +6,7 @@
 | Full line/pencil exclusions agree with noncollinear/nonconcurrent entries for the sets in question | Lemma 2 and its dual, plus the nucleus observation | Exhaustion applies the literal full line/pencil exclusions |
 | Classification and count in PG(2,q) for q at least three | Theorem 3, Lemma 2 and the classical nucleus bound | All four-flag sets in PG(2,3) and all five-flag sets containing a fixed flag in PG(2,4) |
 | Order-two triangle cases | Fano-plane argument after Theorem 3 | All three-flag sets in PG(2,2) |
+
+## Partial Lean evidence
+
+Lean proves that the constructed family has incident flags, has no common opposite, and has noncollinear point entries and nonconcurrent line entries given a third suitable point on the base line. The proof uses incidence, a chosen join with uniqueness for distinct points and a common point for each pair of lines. It works at arbitrary order. The finite cardinality of the family, the existence of the starting data at each order, the order-two analysis and the Desarguesian classification and count are in the paper. [Kernel-checked source](formalization/FlagConstruction.lean)
